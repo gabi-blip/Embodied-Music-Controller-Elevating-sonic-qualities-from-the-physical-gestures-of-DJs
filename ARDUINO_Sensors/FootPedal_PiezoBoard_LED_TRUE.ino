@@ -31,26 +31,24 @@ void setup() {
 
 /* Piezo Board */
 
-  pinMode(piezo1, INPUT_PULLDOWN); //Arduino Monitor Pin State
-  pinMode(1, OUTPUT); // Output Pin 1 (LED 1)
-  digitalWrite(1, HIGH); // Enable Pullups to make Digital Pin 1 High
+    pinMode(piezo1, INPUT_PULLDOWN);
+    pinMode(piezo2, INPUT_PULLDOWN);
+    pinMode(piezo3, INPUT_PULLDOWN);
+    pinMode(piezo4, INPUT_PULLDOWN);
+    pinMode(piezo5, INPUT_PULLDOWN);
 
-  pinMode(piezo2, INPUT_PULLDOWN); //Arduino Monitor Pin State
-  pinMode(2, OUTPUT); // Output Pin 1 (LED 2)
-  digitalWrite(2, HIGH); // Enable Pullups to make Digital Pin 2 High
+    pinMode(1, OUTPUT);
+    pinMode(2, OUTPUT);
+    pinMode(3, OUTPUT);
+    pinMode(4, OUTPUT);
+    pinMode(5, OUTPUT);
 
-  pinMode(piezo3, INPUT_PULLDOWN); //Arduino Monitor Pin State
-  pinMode(3, OUTPUT); // Output Pin 1 (LED 3)
-  digitalWrite(3, HIGH); // Enable Pullups to make Digital Pin 3 High
-
-  pinMode(piezo4, INPUT_PULLDOWN); //Arduino Monitor Pin State
-  pinMode(4, OUTPUT); // Output Pin 1 (LED 4)
-  digitalWrite(4, HIGH); // Enable Pullups to make Digital Pin 4 High
-
-  pinMode(piezo5, INPUT_PULLDOWN); //Arduino Monitor Pin State
-  pinMode(5, OUTPUT); // Output Pin 1 (LED 5)
-  digitalWrite(5, HIGH); // Enable Pullups to make Digital Pin 5 High
-
+    pinMode(1, HIGH);
+    pinMode(2, HIGH);
+    pinMode(3, HIGH);
+    pinMode(4, HIGH);
+    pinMode(5, HIGH);
+    
  }
    
 /*****************************************************************/
@@ -61,15 +59,13 @@ void loop() {
 /* ZX Gesture */
  
   if ( zx_sensor.positionAvailable() ) {
-
     
     z_pos = zx_sensor.readZ();
 
       // Serial.print(" Z: ");
-      // Serial.println(z_pos);
+      Serial.println(z_pos);
 
-    }
-
+}
 
 /* Piezo Trigger */
 
@@ -83,106 +79,51 @@ void loop() {
     
   }
 
-/* Piezo Board */
+/* Piezo Board + LEDs */
 
-  int press1 = analogRead(piezo1);
-  // Serial.println(press1);
-  if (press1 > threshold) {
+  int sensorReading1 = analogRead(piezo1);
+  int sensorReading2 = analogRead(piezo2);
+  int sensorReading3 = analogRead(piezo3);
+  int sensorReading4 = analogRead(piezo4);
+  int sensorReading5 = analogRead(piezo5);
+  // Serial.println(sensorReading5);
 
-    if(toggle)
-    {
-      digitalWrite(1, HIGH);   // set the LED on
-      toggle = !toggle;
-      Serial.println("21");
-    }
-    else
-    {
-      digitalWrite(1, LOW);    // set the LED off
-      toggle = !toggle;
-      Serial.println("22");
-      
-      }
-    }
+  if (sensorReading1 > threshold) {
+  Serial.println("1898");
+  digitalWrite(1, HIGH);
+  delay(100);
+  digitalWrite(1, LOW);
 
-
-  int press2 = analogRead(piezo2);
-  // Serial.println(press2);
-  if (press2 > threshold) {
-
-    if(toggle)
-    {
-      digitalWrite(2, HIGH);   // set the LED on
-      toggle = !toggle;
-      Serial.println("31");
-    }
-    else
-    {
-      digitalWrite(2, LOW);    // set the LED off
-      toggle = !toggle;
-      Serial.println("32");
-      
-      }
-    } 
-
-
-  int press3 = analogRead(piezo3);
-  // Serial.println(press3);
-  if (press3 > threshold) {
-
-    if(toggle)
-    {
-      digitalWrite(3, HIGH);   // set the LED on
-      toggle = !toggle;
-      Serial.println("41");
-    }
-    else
-    {
-      digitalWrite(3, LOW);    // set the LED off
-      toggle = !toggle;
-      Serial.println("42");
-      
-      }
-    }
-
-  
-
-  int press4 = analogRead(piezo4);
-  // Serial.println(press4);
-  if (press4 > threshold) {
-    
-    if(toggle)
-    {
-      digitalWrite(4, HIGH);   // set the LED on
-      toggle = !toggle;
-      Serial.println("51");
-    }
-    else
-    {
-      digitalWrite(4, LOW);    // set the LED off
-      toggle = !toggle;
-      Serial.println("52");
-      
-      }
-    }
-
-
-
-  int press5 = analogRead(piezo5);
-  if (press5 > threshold) {
-    
-    if(toggle)
-    {
-      digitalWrite(5, HIGH);   // set the LED on
-      toggle = !toggle;
-      Serial.println("61");
-    }
-    else
-    {
-      digitalWrite(5, LOW);    // set the LED off
-      toggle = !toggle;
-      Serial.println("62");
-    }
   }
-  delay(50);
+  
+  if (sensorReading2 > threshold) {
+  Serial.println("1970");
+  digitalWrite(2, HIGH);
+  delay(100);
+  digitalWrite(2, LOW);
+  }
+  
+  if (sensorReading3 > threshold) {
+  Serial.println("2010");
+  digitalWrite(3, HIGH);
+  delay(100);
+  digitalWrite(3, LOW);
+  }
+  
+  if (sensorReading4 > threshold) {
+  Serial.println("2006");
+  digitalWrite(4, HIGH);
+  delay(100);
+  digitalWrite(4, LOW);
+  }
+  
+  if (sensorReading5 > threshold) {
+  Serial.println("2018");
+  digitalWrite(5, HIGH);
+  delay(100);
+  digitalWrite(5, LOW);
+  } 
+
+  delay(10);
  
  }
