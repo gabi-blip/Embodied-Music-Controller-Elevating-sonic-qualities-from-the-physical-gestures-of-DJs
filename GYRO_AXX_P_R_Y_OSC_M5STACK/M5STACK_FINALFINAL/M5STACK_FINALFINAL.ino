@@ -132,39 +132,6 @@ int8_t getBatteryLevel()
 
 }
 
-void buildAndSendOSCMsg() { // Compile and send OSC data 
-
-// If M5 is connected to the Network:
-// 1. Compile OSC Messages
-// 2. Send OSC Messages over UDP
-
-  if (isConnected) 
-    {
-   
-    OSCMessage msg("/S2");   // OSC message compilation       
-
-    msg.add(pitch); // Pitch
-    msg.add(roll);  // Roll
-    msg.add(yaw);   // Yaw
-    
-
-    // ... over UDP
-    switch (selectedIP) { // If selectedIP = ...
-      case 1: // ... 1 (Marco) ...
-      Udp.beginPacket(outIp1, outPort); // ... transfer data over Network IP 1
-      break;
-      case 2: // ... 2 (Gabriel) ...
-      Udp.beginPacket(outIp2, outPort); // ... transfer data over Network IP 2
-      break;
-    }
-
-    msg.send(Udp);
-    Serial.println("message sent");
-    Udp.endPacket();
-    msg.empty(); 
-    }
-}
-
 /********************************************************************************************************************************************************************************/
 
 
@@ -220,6 +187,43 @@ void fetchIMUData()  {
     
     }
     
+}
+
+
+/********************************************************************************************************************************************************************************/
+
+
+void buildAndSendOSCMsg() { // Compile and send OSC data 
+
+// If M5 is connected to the Network:
+// 1. Compile OSC Messages
+// 2. Send OSC Messages over UDP
+
+  if (isConnected) 
+    {
+   
+    OSCMessage msg("/S2");   // OSC message compilation       
+
+    msg.add(pitch); // Pitch
+    msg.add(roll);  // Roll
+    msg.add(yaw);   // Yaw
+    
+
+    // ... over UDP
+    switch (selectedIP) { // If selectedIP = ...
+      case 1: // ... 1 (Marco) ...
+      Udp.beginPacket(outIp1, outPort); // ... transfer data over Network IP 1
+      break;
+      case 2: // ... 2 (Gabriel) ...
+      Udp.beginPacket(outIp2, outPort); // ... transfer data over Network IP 2
+      break;
+    }
+
+    msg.send(Udp);
+    Serial.println("message sent");
+    Udp.endPacket();
+    msg.empty(); 
+    }
 }
 
 
