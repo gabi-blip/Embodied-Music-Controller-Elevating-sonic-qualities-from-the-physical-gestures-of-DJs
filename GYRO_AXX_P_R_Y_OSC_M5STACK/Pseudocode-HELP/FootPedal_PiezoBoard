@@ -9,6 +9,7 @@ Outside the loops:
   - Instantiate all input data as numbers
   - Define a threshold for the piezo data
 
+/************/
 
 void setup() {
   
@@ -16,6 +17,8 @@ void setup() {
   - Activate pulldown resistor on each analog input that's being used
 
 }
+
+/************/
 
 void loop() {
 
