@@ -1,0 +1,72 @@
+//                              M5STACK 
+
+// What does the code do?
+//    1. Tell the M5 which data to measure
+//    2. Connect to the M5 via Wi-Fi
+//    3. Receive raw acceleration data from the M5 via the UDP communication protocol
+//    4. Derive Pitch, Roll and Yaw data from the incoming raw acceleration data
+//    5. Format the data into OSC messages
+//    6. Send OSC messages to Max/MSP via the UDP communication protocol
+//    7. Estimate and display the M5's battery level
+
+
+//                             PSEUDOCODE
+
+Outside the loops:
+
+- Include and define
+  . M5Stack
+  . OSC Libraries
+  . WiFi Libraries
+  . UDP Libraries
+
+- Instantiate the Acceleration and Pitch, Roll and Yaw Data as numbers
+
+- Set up the connection to the WiFi and to the UDP Protocol
+  . Select the WiFi Network
+  . Select the computer that will receive, process and send the data to Max/MSP
+  . Select UDP input and output ports
+
+- Estimate battery level
+
+/************/
+
+Main Functions:
+
+  - Retrieve Acceleration and Pitch, Roll and Yaw Data (fetchIMUData):
+      . if (IMUisAvailable) {
+  
+          get acceleration data (ax, ay, az)
+          Calculate Pitch, Roll and Yaw
+        
+      }
+    
+  - Compile them into OSC messages and send them to Max/MSP (buildAndSendOSCMsg) 
+      . if (IMUisAvailable) {
+  
+          Compile the OSC messages (msg.add. ...)
+          Decide on which computer to receive the data from the M5Stack
+          Send OSC messages via UDP
+        
+      }
+    
+/************/
+
+void setup() {
+  
+  - Initialize all Libraries and Devices
+  - Set the M5 screen's background color, text size and text color 
+
+}
+
+/************/
+
+void loop() {
+
+    . if (IMUisAvailable) {
+
+        Compute Main Functions (fetchIMUData, buildAndSendOSCMessages)
+      
+    }  
+
+}
